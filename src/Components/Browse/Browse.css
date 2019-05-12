@@ -1,0 +1,28 @@
+/*@keyframes MeAppear {
+  0% {
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}*/
+
+.BrowseContent {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+@media(max-width: 767px) {
+  /* phones */
+}
+
+@media(max-width: 767px) and (orientation: portrait) {
+  /* portrait phones */
+}
+
+@media(min-width: 768px) {
+  /* tablets and desktop */
+}

@@ -1,0 +1,15 @@
+.dark{
+  background-color: black;
+  color: white;
+}
+.light{
+  background-color: white;
+  color: black;
+}
+
+.dark-text{
+  color: white;
+}
+.light-text{
+  color: black;
+}

@@ -1,0 +1,20 @@
+.navigation__link {
+  font-family: 'Didact Gothic';
+/* font-family: 'Raleway'; */
+  font-size: 1.1em;
+
+}
+
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic|Raleway');
+
+@media(max-width: 767px) {
+  /* phones */
+}
+
+@media(max-width: 767px) and (orientation: portrait) {
+  /* portrait phones */
+}
+
+@media(min-width: 768px) {
+  /* tablets and desktop */
+}

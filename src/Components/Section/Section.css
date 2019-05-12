@@ -1,0 +1,11 @@
+.section.dark{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.section.light{
+  background: white;
+  color: black;
+}

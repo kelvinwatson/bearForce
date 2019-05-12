@@ -1,0 +1,12 @@
+.header.dark{
+  background-image: url('../../Images/background1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.header.light{
+  background: white;
+  color: black;
+}

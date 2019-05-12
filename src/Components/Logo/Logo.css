@@ -1,0 +1,190 @@
+.logo__bear.dark {
+  /* -webkit-animation: neonglow 20s infinite; */
+  /*-webkit-animation: flicker 2s infinite;*/
+
+}
+
+.logo__force.dark {
+  /* -moz-animation: ontheblink 5s infinite;
+  -ms-animation: ontheblink 5s infinite;
+  -webkit-animation: ontheblink 5s infinite;
+  -moz-animation: ontheblink 5s infinite;
+  -ms-animation: ontheblink 5s infinite;
+  -webkit-animation: ontheblink 5s infinite; */
+}
+
+a.logo {
+  /* text-decoration: none;
+  /* required for IE 11, so this <a> can receive pointer events */
+  display: inline-block;
+  pointer-events: auto;
+  background-color: transparent !important;
+
+  /* text-shadow: 0 0 51px #fff, 0 0 51px #ff0;
+
+  -webkit-transition: height color 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -moz-transition: color 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  -o-transition: color 200ms cubic-bezier(0.42, 0, 0.58, 1);
+  transition: color 200ms cubic-bezier(0.42, 0, 0.58, 1); */
+}
+
+a.logo.dark-text {
+  font-family: 'Anton';
+  font-size: 3em;
+  letter-spacing: -0.03em;
+}
+
+a.logo.light-text {
+  font-family: 'Anton';
+  font-size: 3em;
+  letter-spacing: -0.03em;
+}
+.logo.dark{
+  background-color: transparent !important;
+}
+
+/**
+ * fonts
+ */
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+@import url('https://fonts.googleapis.com/css?family=Anton');
+
+/**
+ * keyframes
+ */
+ @-webkit-keyframes flicker {
+   0% {
+     opacity: 0;
+   }
+   9% {
+     opacity: 0;
+   }
+   10% {
+     opacity: .5;
+   }
+   13% {
+     opacity: 0;
+   }
+   20% {
+     opacity: .5;
+   }
+   25% {
+     opacity: 1;
+   }
+ }
+ /*Adapted from https://www.broken-links.com/tests/animations/*/
+
+ @-webkit-keyframes ontheblink {
+   21%,
+   39%,
+   45%,
+   47%,
+   53% {
+     color: #000;
+     text-shadow: none;
+   }
+   26%,
+   38%,
+   40%,
+   44%,
+   46%,
+   48% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+ }
+
+ @-webkit-keyframes neonglow {
+   20%,
+   70% {
+   }
+   25%,
+   50%,
+   75%,
+   95% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+   55% {
+     color: #222;
+     text-shadow: none;
+   }
+ }
+
+ @-moz-keyframes neonglow {
+   20%,
+   70% {
+     color: #000;
+     text-shadow: none;
+   }
+   25%,
+   50%,
+   75%,
+   95% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+   55% {
+     color: #222;
+     text-shadow: none;
+   }
+ }
+
+ @-moz-keyframes ontheblink {
+   21%,
+   39%,
+   45%,
+   47%,
+   53% {
+     color: #000;
+     text-shadow: none;
+   }
+   26%,
+   38%,
+   40%,
+   44%,
+   46%,
+   48% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+ }
+
+ @-ms-keyframes neonglow {
+   20%,
+   70% {
+     color: #000;
+     text-shadow: none;
+   }
+   25%,
+   50%,
+   75%,
+   95% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+   55% {
+     color: #222;
+     text-shadow: none;
+   }
+ }
+
+ @-ms-keyframes ontheblink {
+   21%,
+   39%,
+   45%,
+   47%,
+   53% {
+     color: #000;
+     text-shadow: none;
+   }
+   26%,
+   38%,
+   40%,
+   44%,
+   46%,
+   48% {
+     color: #fff;
+     text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #ff0;
+   }
+ }
