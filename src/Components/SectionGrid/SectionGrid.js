@@ -22,8 +22,8 @@ import './SectionGrid.css';
       {data.map((evt)=>
 
         <div className="fl w-50 w-third-m w-25-ns">
-          <div className="aspect-ratio aspect-ratio--9x16">
-            <div className="bg-center aspect-ratio--object pa2">
+          <div className="aspect-ratio aspect-ratio--3x4">
+            <div className="bg-center aspect-ratio--object pa1">
               <img className={`cover section-grid__image`} src={`${evt.imageUrl}`}/>
             </div>
           </div>

@@ -17,7 +17,7 @@ import './SectionTitle.css';
 
    return (
 
-     <div className={`section-title ${themeModifier} db dt-l w-100 border-box pa3`}>
+     <div className={`section-title ${themeModifier} db dt-l w-100 border-box pa3 pt2 pb2`}>
       <div className={`section-title__wrapper ${themeModifier}`}>
         <span className={`section-title__text ${themeModifier} ${darkTitleClassName}`}>{title}</span>
       </div>

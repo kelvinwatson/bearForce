@@ -5,6 +5,7 @@ import { updatePlace } from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    isDarkTheme: state.theme.isDarkTheme,
     place: state.add.place,
     isMapLoaded: state.maps.isLoaded
   }
