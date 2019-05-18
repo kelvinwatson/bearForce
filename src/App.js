@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 //styles
 import './App.css';
 

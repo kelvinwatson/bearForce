@@ -2,11 +2,25 @@ import { combineReducers } from 'redux';
 import DebugLog from './Utils/DebugLog';
 
 import {
+  MAPS,
   EVENTS,
   THEME,
   NAVIGATION,
 } from './Actions';
 
+export function maps(state = {
+  isLoaded: false,
+}, action) {
+  switch(action.type)
+  {
+    case MAPS.LOAD_MAP.SUCCESS:
+      return Object.assign({}, state, {
+        isLoaded: action.isLoaded
+      });
+    default:
+      return state;
+  }
+}
 /**
  * Theme-related actions
  */
@@ -77,16 +91,29 @@ export function navigation(state = {
   }
 }
 
+export function add(state = {
+  place: undefined
+}, action){
+  switch(action.type){
+    case EVENTS.ADD_UPDATE_LOCATION.SUCCESS:
+      return Object.assign({}, state, {
+        place: action.place
+      });
+    default:
+      return state;
+  }
+}
+
 /*
  * root reducer
  */
 const RootReducer = combineReducers({
-
+  maps,
   theme,
   navigation,
   featuredEvents,
   allEvents,
-
+  add
 });
 
 export default RootReducer;

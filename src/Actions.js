@@ -19,9 +19,25 @@ export const EVENTS = {
     LOADING: 'LOADING_GET_ALL_EVENTS',
     SUCCESS: 'SUCCESS_GET_ALL_EVENTS',
     FAILURE: 'FAILURE_GET_ALL_EVENTS',
+  },
+  ADD_SUBMIT: {
+    LOADING: 'LOADING_SUBMIT_EVENT',
+    SUCCESS: 'SUCCESS_SUBMIT_EVENT',
+    FAILURE: 'FAILURE_SUBMIT_EVENT',
+  },
+  ADD_UPDATE_LOCATION: {
+    SUCCESS: 'SUCCESS_UPDATE_LOCATION_EVENT'
   }
   //TODO: SORTED, etc
 };
+
+export const MAPS = {
+  LOAD_MAP: {
+    SUCCESS: 'SUCCESS_LOAD_MAP',
+    FAILURE: 'FAILURE_LOAD_MAP',
+  }
+};
+
 
 export const NAVIGATION = {
   GET: 'GET_NAVIGATION',
@@ -87,10 +103,28 @@ export const TASKS = {
 //   }
 // }
 
+export function mapLoaded(){
+  return {
+    type: MAPS.LOAD_MAP.SUCCESS,
+    isLoaded: true,
+  }
+}
+
 export function toggleTheme(){
 
   return {
     type: THEME.TOGGLE,
+  }
+}
+
+export function submitSingleEvent(event) {
+  console.log('EVENT: ', event);
+}
+
+export function updatePlace(place) {
+  return {
+    type: EVENTS.ADD_UPDATE_LOCATION.SUCCESS,
+    place
   }
 }
 

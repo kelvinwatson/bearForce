@@ -19,7 +19,7 @@ import '../../CommonStyles/Common.css';
           Browse
         </Link>
 
-        <Link className={`navigation__link ${themeModifier} link dim f6 f5-l dib mr3 mr4-l`} to="/about" onClick={(e) => onNavigationClicked('me')}>
+        <Link className={`navigation__link ${themeModifier} link dim f6 f5-l dib mr3 mr4-l`} to="/add" onClick={(e) => onNavigationClicked('me')}>
           Add
         </Link>
 
