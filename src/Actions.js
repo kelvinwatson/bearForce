@@ -27,6 +27,16 @@ export const EVENTS = {
   },
   ADD_UPDATE_LOCATION: {
     SUCCESS: 'SUCCESS_UPDATE_LOCATION_EVENT'
+  },
+  ADD_UPDATE_LOCAL_IMG_SRC: {
+    LOADING: 'LOADING_UPDATE_LOCAL_IMG_SRC',
+    SUCCESS: 'SUCCESS_UPDATE_LOCAL_IMG_SRC'
+  },
+  ADD_CROPPED_IMG_SRC: {
+    SUCCESS: 'SUCCESS_ADD_CROPPED_IMG_SRC'
+  },
+  UPDATE_NAME: {
+    SUCCESS: 'SUCCESS_UPDATE_NAME_EVENTS'
   }
   //TODO: SORTED, etc
 };
@@ -103,6 +113,27 @@ export const TASKS = {
 //   }
 // }
 
+export function updateEventName(value) {
+  return {
+    type: EVENTS.UPDATE_NAME.SUCCESS,
+    value
+  }
+}
+
+export function croppedImageUpdate(src) {
+  return {
+    type: EVENTS.ADD_CROPPED_IMG_SRC.SUCCESS,
+    src
+  }
+}
+
+export function localImageLoading(value) {
+  return {
+    type: EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.LOADING,
+    value
+  }
+}
+
 export function mapLoaded(){
   return {
     type: MAPS.LOAD_MAP.SUCCESS,
@@ -125,6 +156,13 @@ export function updatePlace(place) {
   return {
     type: EVENTS.ADD_UPDATE_LOCATION.SUCCESS,
     place
+  }
+}
+
+export function updateLocalImgSrc(localImgSrc) {
+  return {
+    type: EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.SUCCESS,
+    localImgSrc: localImgSrc
   }
 }
 

@@ -26,6 +26,7 @@
     "hls.js": "^0.12.2",
     "isomorphic-fetch": "^2.2.1",
     "react": "^16.7.0",
+    "react-cropper-image-editor": "^1.0.10",
     "react-dom": "^16.7.0",
     "react-hls": "^0.0.8",
     "react-redux": "^6.0.0",

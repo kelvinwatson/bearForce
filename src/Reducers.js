@@ -96,9 +96,36 @@ export function add(state = {
 }, action){
   switch(action.type){
     case EVENTS.ADD_UPDATE_LOCATION.SUCCESS:
+      const placeValidated = action.place.formatted_address.length > 2 ? true : false
       return Object.assign({}, state, {
-        place: action.place
+        place: action.place,
+        placeValidated
       });
+    case EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.SUCCESS:
+      DebugLog('ACTION.LOCALIMGSRC: ', action.localImgSrc)
+      return Object.assign({}, state, {
+        localImgSrc: action.localImgSrc,
+        croppedImgSrc: undefined,
+        eventPosterValidated: undefined
+      })
+    case EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.LOADING:
+      DebugLog('ACTION.LOCALIMGSRC.LOADING: ', action.value);
+      return Object.assign({}, state, {
+        editorLoading: action.value,
+        eventPosterValidated: undefined
+      })
+    case EVENTS.ADD_CROPPED_IMG_SRC.SUCCESS:
+      return Object.assign({}, state, {
+        croppedImgSrc: action.src,
+        localImgSrc: undefined,
+        eventPosterValidated: true
+      })
+    case EVENTS.UPDATE_NAME.SUCCESS:
+      const eventNameValidated = action.value.length > 2 ? true : false
+      return Object.assign({}, state, {
+        eventName: action.value,
+        eventNameValidated
+      })
     default:
       return state;
   }
