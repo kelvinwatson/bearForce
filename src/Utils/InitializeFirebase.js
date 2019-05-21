@@ -37,6 +37,10 @@ var FirebaseUtil = {
       console.log('CLOSING FIREBASE');
       FirebaseServer.close();
     }
+  },
+
+  uploadFile: function(ref, fileName) {
+    firebase.storage().ref(ref)
   }
 };
 

@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import DebugLog from './Utils/DebugLog';
 
+import { isValidURL } from './utils';
+
 import {
   MAPS,
   EVENTS,
@@ -126,6 +128,26 @@ export function add(state = {
         eventName: action.value,
         eventNameValidated
       })
+    case EVENTS.UPDATE_WEBSITE.SUCCESS:
+      const eventWebsiteUrlValidated = isValidURL(action.url);
+      return Object.assign({}, state, {
+        eventWebsiteUrl: action.url,
+        eventWebsiteUrlValidated
+      })
+    case EVENTS.UPDATE_DATETIME.SUCCESS:
+      const eventDateTimeValidated = action.dateTime.isAfter(new Date()) ? true : false;
+      return Object.assign({}, state, {
+        eventDateTime: action.dateTime.toISOString(),
+        eventDateTimeValidated
+      })
+    case EVENTS.UPDATE_DESCRIPTION.SUCCESS:
+      let eventDescription = action.description
+      return Object.assign({}, state, {
+        eventDescription,
+        eventDescriptionValidated: true
+      })
+    case EVENTS.SUBMIT_FORM.LOADING:
+      
     default:
       return state;
   }

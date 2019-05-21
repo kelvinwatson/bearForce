@@ -37,6 +37,20 @@ export const EVENTS = {
   },
   UPDATE_NAME: {
     SUCCESS: 'SUCCESS_UPDATE_NAME_EVENTS'
+  },
+  UPDATE_WEBSITE: {
+    SUCCESS: 'SUCCESS_UPDATE_WEBSITE_EVENTS'
+  },
+  UPDATE_DATETIME: {
+    SUCCESS: 'SUCCESS_UPDATE_DATETIME'
+  },
+  UPDATE_DESCRIPTION: {
+    SUCCESS: 'SUCCESS_UPDATE_DESCRIPTION_EVENT'
+  },
+  SUBMIT_FORM: {
+    LOADING: 'LOADING_SUBMIT_FORM_EVENT',
+    SUCCESS: 'SUCCESS_SUBMIT_FORM_EVENT',
+    FAILURE: 'FAILURE_SUBMIT_FORM_EVENT'
   }
   //TODO: SORTED, etc
 };
@@ -87,31 +101,68 @@ export const TASKS = {
   },
 };
 
-/**
- * action creators
- */
 
-// export function fetchMusic() {
-//   return function (dispatch) {
-//     // First dispatch: the app state is updated to inform
-//     // that the API call is starting.
-//
-//     dispatch(getMusicLoading());
-//
-//     let arr = [];
-//
-//     let firebase = FirebaseUtil.getFirebase();
-//     let storage = firebase.storage();
-//     let ref = storage.ref();
-//
-//     return FirebaseUtil.getFirebase().storage().ref().child('Music/MindlessGraffiti.mp3').getDownloadURL().then(function(url){
-//       arr.push(url);
-//       dispatch(getMusicSuccess(arr));
-//     }).catch(function(err) {
-//       dispatch(getMusicFailure(err));
-//     });
-//   }
-// }
+export function submitNewEvent(event) {
+  return function(dispatch) {
+    // First dispatch: the app state is updated to inform
+    // that the API call is starting.
+    dispatch(submitNewEventLoading());
+
+    const firebase = FirebaseUtil.getFirebase();
+    const firestore = firebase.firestore();
+    DebugLog('fs',firestore);
+    return firestore.collection('pendingEvents').add(event)
+    .then((docRef) => {
+        DebugLog("Document written with ID: ", docRef.id);
+        dispatch(submitNewEventSuccess(docRef));
+    })
+    .catch((error) => {
+        DebugLog("Error adding document: ", error);
+        dispatch(submitNewEventFailure(error));
+    });
+  }
+}
+
+export function submitNewEventLoading() {
+  return {
+    type: EVENTS.SUBMIT_FORM.LOADING
+  }
+}
+
+export function submitNewEventFailure(error) {
+  return {
+    type: EVENTS.SUBMIT_FORM.FAILURE,
+    error,
+  }
+}
+
+export function submitNewEventSuccess(event) {
+  return {
+    type: EVENTS.SUBMIT_FORM.SUCCESS,
+    event,
+  }
+}
+
+export function updateEventDescription(description) {
+  return {
+    type: EVENTS.UPDATE_DESCRIPTION.SUCCESS,
+    description
+  }
+}
+
+export function updateEventDateTime(dateTime) {
+  return {
+    type: EVENTS.UPDATE_DATETIME.SUCCESS,
+    dateTime
+  }
+}
+
+export function eventWebsiteUpdate(url) {
+  return {
+    type: EVENTS.UPDATE_WEBSITE.SUCCESS,
+    url
+  }
+}
 
 export function updateEventName(value) {
   return {

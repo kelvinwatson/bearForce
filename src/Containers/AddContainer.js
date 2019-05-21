@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import DebugLog from '../Utils/DebugLog';
 import Add from '../Components/Add/Add';
-import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName } from '../Actions';
+import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName, eventWebsiteUpdate, updateEventDateTime, updateEventDescription, submitNewEvent } from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -14,7 +14,13 @@ const mapStateToProps = (state, ownProps) => {
     croppedImgSrc: state.add.croppedImgSrc,
     eventPosterValidated: state.add.eventPosterValidated,
     eventName: state.add.eventName,
-    eventNameValidated: state.add.eventNameValidated
+    eventNameValidated: state.add.eventNameValidated,
+    eventWebsiteUrl: state.add.eventWebsiteUrl,
+    eventWebsiteUrlValidated: state.add.eventWebsiteUrlValidated,
+    eventDateTime: state.add.eventDateTime,
+    eventDateTimeValidated: state.add.eventDateTimeValidated,
+    eventDescription: state.add.eventDescription,
+    eventDescriptionValidated: state.add.eventDescriptionValidated
   }
 }
 
@@ -32,11 +38,23 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onCroppedImageSaved: (src) => {
       dispatch(croppedImageUpdate(src))
     },
+    onWebsiteChanged: (url) => {
+      dispatch(eventWebsiteUpdate(url))
+    },
     updateEditorLoading: (value) => {
       dispatch(localImageLoading(value))
     },
     onNameChanged: (value) => {
       dispatch(updateEventName(value))
+    },
+    onDateTimeChanged: (dateTime) => {
+      dispatch(updateEventDateTime(dateTime))
+    },
+    onDescriptionChanged: (description) => {
+      dispatch(updateEventDescription(description))
+    },
+    submitNewEvent: (event) => {
+      dispatch(submitNewEvent(event))
     }
   }
 }
