@@ -62,8 +62,10 @@
   -webkit-font-smoothing: antialiased;
   background: none;
 }
-
-div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters.MuiPickersToolbar-toolbar.MuiPickerDTHeader-toolbar{
+.MuiInputBase-root .MuiInput-root .MuiInput-underline .MuiInputBase-formControl .MuiInput-formControl {
+    color: black;
+}
+.MuiPickersToolbar-toolbar.MuiPickerDTToolbar-toolbar{
   background-color: black;
 }
 
@@ -71,18 +73,26 @@ div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.M
   background-color: black;
 }
 
-div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClock-pin {
+div.MuiPickersClock-pin {
   background-color: black;
 }
-div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div.MuiPickersSlideTransition-transitionContainer.MuiPickersCalendar-transitionContainer .MuiPickersDay-isSelected {
+.MuiPickersClockNumber-clockNumberSelected{
   background-color: black;
 }
-div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform {
+.MuiButtonBase-root.MuiIconButton-root.MuiPickersDay-day.MuiPickersDay-daySelected {
   background-color: black;
 }
-
+.MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform{
+  background-color: black;
+}
 div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > span.MuiTypography-root.MuiTypography-body1.MuiPickersClockNumber-clockNumber.Mui-selected {
   background-color: black;
+}
+div.MuiPickersClockPointer-pointer{
+  background-color: black;
+}
+.MuiPickersClockPointer-pointer > div {
+  border-color: black;
 }
 div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClockPointer-pointer{
   background-color: black;
