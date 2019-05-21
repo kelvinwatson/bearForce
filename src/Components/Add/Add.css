@@ -16,7 +16,7 @@
   margin: 0;
   font-size: 0.9rem;
   padding: 1rem;
-  color: #000;
+  color: inherit;
   transition: background-color .15s ease-in-out;
   align-items: center;
   display: inline-flex;
@@ -29,6 +29,7 @@
   -webkit-font-smoothing: antialiased;
   background: none;
 }
+
 
 #image-editor-container > section > div > br {
 
@@ -48,7 +49,7 @@
   margin: 0;
   font-size: 0.9rem;
   padding: 1rem;
-  color: #000;
+  color: inherit;
   transition: background-color .15s ease-in-out;
   align-items: center;
   display: inline-flex;
@@ -62,6 +63,43 @@
   background: none;
 }
 
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div.MuiToolbar-root.MuiToolbar-regular.MuiToolbar-gutters.MuiPickersToolbar-toolbar.MuiPickerDTHeader-toolbar{
+  background-color: black;
+}
+
+.MuiPickersDay-isSelected {
+  background-color: black;
+}
+
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClock-pin {
+  background-color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div.MuiPickersSlideTransition-transitionContainer.MuiPickersCalendar-transitionContainer .MuiPickersDay-isSelected {
+  background-color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClockPointer-pointer.MuiPickersClockPointer-animateTransform {
+  background-color: black;
+}
+
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > span.MuiTypography-root.MuiTypography-body1.MuiPickersClockNumber-clockNumber.Mui-selected {
+  background-color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClockPointer-pointer{
+  background-color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div > div > div.MuiPickersClockPointer-pointer > div {
+  background-color: black;
+  border-color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogActions-root.MuiDialogActions-spacing > button:nth-child(1) > span.MuiButton-label {
+  color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogActions-root.MuiDialogActions-spacing > button:nth-child(2){
+  color: black;
+}
+div.MuiDialog-root > div.MuiDialog-container.MuiDialog-scrollPaper > div > div.MuiDialogContent-root.MuiPickersModal-dialog > div:nth-child(2) > div > div.MuiPickersSlideTransition-transitionContainer.MuiPickersCalendar-transitionContainer > div > div:nth-child(4) > div:nth-child(3) > button > span.MuiIconButton-label > p {
+  color: grey;
+}
 @media(max-width: 767px) {
   /* phones */
 }

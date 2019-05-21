@@ -121,7 +121,7 @@ export default class Add extends React.Component {
           onLoad={this.onLoad}
           onPlaceChanged={()=>this.props.onPlaceChanged(this.autocomplete.getPlace())}
         >
-          <input className={`autocomplete pa2 input-reset ba ${placeBorderClass} w-100 measure`} id="eventLocation" type="text" autocomplete="off" value={props.place && props.place.formatted_address} required/>
+          <input className={`autocomplete pa2 input-reset ba ${placeBorderClass} w-100 measure`} id="eventLocation" type="text" autocomplete="off" required/>
         </Autocomplete>
       );
     }
