@@ -27,8 +27,7 @@
  bottom: 0;
  left: 0;
  right: 0;
- height: 100%;
- width: 100%;
+
  opacity: 0;
  transition: .5s ease;
  background-color: black;
@@ -54,6 +53,6 @@
 .SectionGridItemContainer:hover .SectionGridItem__OverlayText{
   opacity: 1;
 }
-.SectionGridItem__EventName{
-  font-family:'Didact Gothic'
+.SectionGridItem__Detail{
+  font-family: 'Didact Gothic'
 }
