@@ -62,6 +62,9 @@
   -webkit-font-smoothing: antialiased;
   background: none;
 }
+.MuiTabs-flexContainer{
+  background-color: black;
+}
 .MuiInputBase-root .MuiInput-root .MuiInput-underline .MuiInputBase-formControl .MuiInput-formControl {
     color: black;
 }

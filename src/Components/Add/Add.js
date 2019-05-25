@@ -1,5 +1,6 @@
 import React from 'react';
 import DebugLog from '../../Utils/DebugLog';
+import SectionTitleContainer from '../../Containers/SectionTitleContainer';
 import { Autocomplete, LoadScript } from '@react-google-maps/api';
 import ImageEditorRc from 'react-cropper-image-editor';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -184,9 +185,11 @@ export default class Add extends React.Component {
     // const
 
     return (
-        <form className={`AddContent pa4 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
+        <div>
+        <SectionTitleContainer title={'ADD AN EVENT'}/>
+        <form className={`AddContent ph3 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
         <input type="hidden" autocomplete="off" required/>
-        <fieldset className="ba b--transparent ph0 mh0">
+        <fieldset className="ba b--transparent ph0 pv0 mh0">
           <div className="mt2">
             <label className={`db fw4 lh-copy f5 bg-animate hover-bg-black hover-white inline-flex items-center pa2 ba ${fileUploadBorderClass} border-box w-100 measure`} for="eventImage"><i className="material-icons pr3">cloud_upload</i>Upload event poster / banner</label>
             <input className="dn" id="eventImage" name="eventImage" type="file" accept="image/*" placeholder="Upload" onChange={this.onImageChange} required/>
@@ -231,6 +234,7 @@ export default class Add extends React.Component {
           <input className="event-submit f5 black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba b--black-20 border-box" type="submit"/>
         </div>
         </form>
+        </div>
     )
   }
 }
