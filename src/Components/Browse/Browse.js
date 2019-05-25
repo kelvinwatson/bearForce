@@ -17,7 +17,7 @@ export default class Browse extends React.Component {
 
     return (
 
-        <div className={`BrowseContent ${themeModifier}`}>
+        <div className={`pb4 BrowseContent ${themeModifier}`}>
 
           <SectionContainer
             title={featuredEventsTitle}

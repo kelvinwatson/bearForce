@@ -23,8 +23,21 @@ import './SectionGrid.css';
 
         <div className="fl w-50 w-third-m w-25-ns">
           <div className="aspect-ratio aspect-ratio--3x4">
-            <div className="bg-center aspect-ratio--object pa1">
-              <img className={`cover section-grid__image`} src={`${evt.imageUrl}`}/>
+            <div className="SectionGridItemContainer bg-center aspect-ratio--object pa1">
+
+              <img className={`SectionGridItemImage cover section-grid__image`} src={`${evt.imageUrl}`}/>
+
+              <aside className="SectionGridItem__OverlayContainer">
+
+              </aside>
+
+              <div className="SectionGridItem__OverlayText">
+                <span className={`SectionGridItem__EventName f3`}>{evt.name}</span>
+                <br/>
+                <span className={`SectionGridItem__StartDate f6`}>{evt.startDate}</span>
+                <br/>
+                <span className={`SectionGridItem__Address f6`}>{evt.address}</span>
+              </div>
             </div>
           </div>
         </div>

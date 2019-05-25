@@ -185,7 +185,7 @@ export default class Add extends React.Component {
     // const
 
     return (
-        <div>
+        <div className={`pb4`}>
         <SectionTitleContainer title={'ADD AN EVENT'}/>
         <form className={`AddContent ph3 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
         <input type="hidden" autocomplete="off" required/>
