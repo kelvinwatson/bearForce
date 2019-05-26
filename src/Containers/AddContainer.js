@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
-import DebugLog from '../Utils/DebugLog';
+// import DebugLog from '../Utils/DebugLog';
 import Add from '../Components/Add/Add';
-import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName, eventWebsiteUpdate, updateEventDateTime, updateEventDescription, submitNewEvent } from '../Actions';
+import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName, eventWebsiteUpdate, updateEventDateTime, updateEventDescription, compressImage } from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    imageUrlForEditor: state.compressImage.imageUrlForEditor,
     editorLoading: state.add.editorLoading,
     isDarkTheme: state.theme.isDarkTheme,
     place: state.add.place,
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         place_id: place.place_id
       }));
     },
+    onCompressImage: (file)=>{
+      dispatch(compressImage(file));
+    },
     onLocalImgSrcChanged: (localImgSrc) => {
       dispatch(updateLocalImgSrc(localImgSrc))
     },
@@ -54,7 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(updateEventDescription(description))
     },
     submitNewEvent: (event) => {
-      dispatch(submitNewEvent(event))
+      dispatch(compressImage(event))
     }
   }
 }

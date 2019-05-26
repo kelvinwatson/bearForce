@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DebugLog from '../Utils/DebugLog';
+// import DebugLog from '../Utils/DebugLog';
 import Section from '../Components/Section/Section';
 // import { scrollDown, scrollUp } from '../Actions';
 
@@ -14,9 +14,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onItemClick: (evt) => {
-      DebugLog('onItemClick',evt);
-    }
+
   }
 }
 

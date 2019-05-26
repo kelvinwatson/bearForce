@@ -5,14 +5,14 @@ import 'core-js/es/set';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import Root from './Components/Root/Root'
 import registerServiceWorker from './registerServiceWorker';
 
 /**
  * REDUX
  */
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';

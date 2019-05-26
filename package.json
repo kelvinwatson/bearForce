@@ -21,6 +21,7 @@
     "ajv": "^6.7.0",
     "axios": "^0.18.0",
     "babel-preset-es2015": "^6.24.1",
+    "compress.js": "^1.1.2",
     "core-js": "^3.0.0-beta.12",
     "es6-promise": "^4.2.5",
     "firebase": "^6.0.2",
@@ -32,6 +33,7 @@
     "react": "^16.7.0",
     "react-cropper-image-editor": "^1.0.10",
     "react-dom": "^16.7.0",
+    "react-firebaseui": "^3.1.2",
     "react-hls": "^0.0.8",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
@@ -50,7 +52,8 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "test:watch": "npm test -- --watch",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "disable": "firebase hosting:disable"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -58,7 +61,6 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
     "firebase-server": "^1.0.1",
-    "jest": "^24.8.0",
     "jest-css-modules": "^2.0.0",
     "react-test-renderer": "^16.8.0-alpha.1",
     "redux-devtools": "^3.5.0"

@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { Route } from 'react-router';
+// import { Router, Route } from 'react-router';
+// import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import AddContainer from '../../Containers/AddContainer';
 import HeaderContainer from '../../Containers/HeaderContainer';
-import App from '../../App';
+// import App from '../../App';
 import BrowseContainer from '../../Containers/BrowseContainer';
+import EventContainer from '../../Containers/EventContainer';
 import GoogleMapLoaderContainer from '../../Containers/GoogleMapLoaderContainer';
 import ReachContainer from '../../Containers/ReachContainer';
 import './Root.css';
@@ -24,6 +27,7 @@ const Root = ({ store }) => (
         <Route path="/browse" component={BrowseContainer} />
         <Route path="/reach" component={ReachContainer} />
         <Route path="/add" component={AddContainer} />
+        <Route path="/event/:id" component={EventContainer}/>
       </div>
     </BrowserRouter>
   </Provider>

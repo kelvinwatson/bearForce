@@ -2,7 +2,7 @@
  * Std lib
  */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import background1 from '../../Images/background1.png';
 
 /**
@@ -26,7 +26,7 @@ import './Header.css';
    return (
 
      <nav className={`header ${themeModifier} db dt-l w-100 border-box pa3`}>
-        <img src={background1} className={`dn`}/>
+        <img src={background1} className={`dn`} alt={`background`}/>
        <LogoContainer/>
 
        <NavigationContainer/>

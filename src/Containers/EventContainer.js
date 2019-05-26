@@ -1,23 +1,21 @@
 import { connect } from 'react-redux';
 // import DebugLog from '../Utils/DebugLog';
-import Logo from '../Components/Logo/Logo';
+import Event from '../Components/Event/Event';
 
-const mapStateToProps = (state) => {
-
+const mapStateToProps = (state, ownProps) => {
   return {
-    isDarkTheme: state.theme.isDarkTheme,
+    eventId: ownProps.match.params.id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
   }
 }
 
-const LogoContainer = connect(
+const EventContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Logo)
+)(Event)
 
-export default LogoContainer;
+export default EventContainer;

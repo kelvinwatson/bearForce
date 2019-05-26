@@ -1,7 +1,7 @@
 import React from 'react';
 import DebugLog from '../../Utils/DebugLog';
 import SectionTitleContainer from '../../Containers/SectionTitleContainer';
-import { Autocomplete, LoadScript } from '@react-google-maps/api';
+import { Autocomplete } from '@react-google-maps/api';
 import ImageEditorRc from 'react-cropper-image-editor';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import Moment from "@date-io/moment";
@@ -26,26 +26,36 @@ export default class Add extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
+  /*
+   * Listen for compressedImage changes
+   */
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.imageUrlForEditor !== this.props.imageUrlForEditor) {
+      // console.log('compressedImageChanged', this.props.compressedImage);
+
+    }
+  }
+
   onImageChange(evt) {
+    //clear previous
+    this.onCroppedImageChange();
+
     const file = evt.nativeEvent.srcElement.files[0];
     if(!file)
       return;
-    const reader = new FileReader();
-    const self = this;
     const fileSize = file.size / 1024 / 1024;//MB
-    if(fileSize > 5) {
+    if(fileSize > 10) {
       //TODO: Emit image too big failure.
-    } else {
-      self.props.updateEditorLoading(true);
-      reader.addEventListener("load", function () {
-        self.props.onLocalImgSrcChanged(reader.result);
-        self.props.updateEditorLoading(false);
-      }, false);
-      if (file) {
-        reader.readAsDataURL(file);
-      }
+      return;
     }
+    //compress
+    this.props.onCompressImage(file);
   }
+
+  compressImage(file){
+
+  }
+
 
   onCroppedImageChange(imgData) {
     this.props.onCroppedImageSaved(imgData);
@@ -72,8 +82,8 @@ export default class Add extends React.Component {
   }
 
   buildImageEditor(props) {
-    if(props.localImageSrc) {
-      let borderClass = props.eventPosterValidated === true ? 'b--green' : (props.eventPosterValidated === false ? 'b--red' : 'b--black-20');
+    if(props.imageUrlForEditor && !props.croppedImgSrc) {
+      // let borderClass = props.eventPosterValidated === true ? 'b--green' : (props.eventPosterValidated === false ? 'b--red' : 'b--black-20');
       return (
         <section>
           <small id="comment-desc" className="pb2 f6 black-60">Crop and rotate your image as needed.</small>
@@ -81,9 +91,8 @@ export default class Add extends React.Component {
             className="mt2 w-100 measure"
             ref='cropper'
             crossOrigin='true' // boolean, set it to true if your image is cors protected or it is hosted on cloud like aws s3 image server
-            src={props.localImageSrc}
-            guides={true}
-                    rotatable={true}
+            src={props.imageUrlForEditor}
+            rotatable={true}
             aspectRatio={3 / 4}
             movable={false}
             scalable={false}
@@ -108,8 +117,7 @@ export default class Add extends React.Component {
   buildImagePreview(props) {
     if(props.croppedImgSrc) {
       return (
-        <img className="cropped-img-src"
-        src={props.croppedImgSrc}/>
+        <img className={`cropped-img-src w-100 measure`} src={props.croppedImgSrc} alt=""/>
       )
     }
   }
@@ -122,7 +130,7 @@ export default class Add extends React.Component {
           onLoad={this.onLoad}
           onPlaceChanged={()=>this.props.onPlaceChanged(this.autocomplete.getPlace())}
         >
-          <input className={`autocomplete pa2 input-reset ba ${placeBorderClass} w-100 measure`} id="eventLocation" type="text" autocomplete="off" required/>
+          <input className={`autocomplete pa2 input-reset ba ${placeBorderClass} w-100 measure`} id="eventLocation" type="text" autoComplete="off" required/>
         </Autocomplete>
       );
     }
@@ -188,10 +196,10 @@ export default class Add extends React.Component {
         <div className={`pb4`}>
         <SectionTitleContainer title={'ADD AN EVENT'}/>
         <form className={`AddContent ph3 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
-        <input type="hidden" autocomplete="off" required/>
+        <input type="hidden" autoComplete="off" required/>
         <fieldset className="ba b--transparent ph0 pv0 mh0">
           <div className="mt2">
-            <label className={`db fw4 lh-copy f5 bg-animate hover-bg-black hover-white inline-flex items-center pa2 ba ${fileUploadBorderClass} border-box w-100 measure`} for="eventImage"><i className="material-icons pr3">cloud_upload</i>Upload event poster / banner</label>
+            <label className={`db fw4 lh-copy f5 bg-animate hover-bg-black hover-white inline-flex items-center pa2 ba ${fileUploadBorderClass} border-box w-100 measure`} htmlFor="eventImage"><i className="material-icons pr3">cloud_upload</i>Upload event poster / banner</label>
             <input className="dn" id="eventImage" name="eventImage" type="file" accept="image/*" placeholder="Upload" onChange={this.onImageChange} required/>
           </div>
           <div id="image-editor-container" className="mt2 w-100 measure">
@@ -201,33 +209,33 @@ export default class Add extends React.Component {
         </fieldset>
         <fieldset className="ba b--transparent ph0 mh0">
           <div className="mt2">
-            <label className="db fw4 lh-copy f6" for="eventName">Event name</label>
+            <label className="db fw4 lh-copy f6" htmlFor="eventName">Event name</label>
             <input className={`event-name pa2 input-reset ba ${eventNameBorderClass} w-100 measure`} id="eventName" name="eventName" type="text" onChange={this.onNameChanged} value={this.eventName} required/>
           </div>
         </fieldset>
         <fieldset className="event-location ba b--black-20 b--transparent ph0 mh0">
           <div className="mt2">
-            <label className="db fw4 lh-copy f6" for="eventLocation">Location / Venue</label>
+            <label className="db fw4 lh-copy f6" htmlFor="eventLocation">Location / Venue</label>
             {AutoCompleteDom}
           </div>
         </fieldset>
         <fieldset className="event-date-time ba b--transparent ph0 mh0">
-          <div class="mt2">
-            <label className="db fw4 lh-copy f6" for="eventDateTime">Date and time</label>
+          <div className="mt2">
+            <label className="db fw4 lh-copy f6" htmlFor="eventDateTime">Date and time</label>
             {DateTimePickerDom}
           </div>
         </fieldset>
         <fieldset className="ba b--transparent ph0 mh0">
-          <div class="mt2">
-            <label className="db fw4 lh-copy f6" for="eventWebsite">Event website</label>
+          <div className="mt2">
+            <label className="db fw4 lh-copy f6" htmlFor="eventWebsite">Event website</label>
             <input className={`event-name pa2 input-reset ba ${eventWebsiteBorderClass} w-100 measure`} id="eventName" name="eventName" type="url" onChange={this.onWebsiteChanged} value={this.eventWebsiteUrl} required/>
           </div>
         </fieldset>
         <fieldset className="ba b--transparent ph0 mh0">
           <div className="mt2">
-            <label className="db fw4 lh-copy f6" for="eventDescription">Description / Additional details</label>
+            <label className="db fw4 lh-copy f6" htmlFor="eventDescription">Description / Additional details</label>
             <textarea className="event-description db border-box hover-black w-100 measure ba b--black-20 pa2 mb2" aria-describedby="comment-desc" id="eventDescription" name="eventDescription" maxLength={1000} onChange={this.onDescriptionChanged}/>
-            <small id="comment-desc" class="f6 black-60">The more details, the better. Can use this text to <a href="#" class="link underline black-80 hover-blue">link to more info.</a></small>
+            <small id="comment-desc" className="f6 black-60">The more details, the better. Can use this text to <a href="/" className="link underline black-80 hover-blue">link to more info.</a></small>
           </div>
         </fieldset>
         <div className="mt3">

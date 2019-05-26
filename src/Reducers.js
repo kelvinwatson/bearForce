@@ -147,9 +147,23 @@ export function add(state = {
         eventDescriptionValidated: true
       })
     case EVENTS.SUBMIT_FORM.LOADING:
-      
+      return state;
     default:
       return state;
+  }
+}
+
+export function compressImage(state = {
+  imageUrlForEditor: undefined,
+}, action) {
+  switch(action.type){
+    case EVENTS.COMPRESS_IMG.SUCCESS:
+      return Object.assign({}, state, {
+        imageUrlForEditor: action.imageUrlForEditor,
+      });
+    default:
+      return state;
+
   }
 }
 
@@ -162,7 +176,8 @@ const RootReducer = combineReducers({
   navigation,
   featuredEvents,
   allEvents,
-  add
+  add,
+  compressImage,
 });
 
 export default RootReducer;

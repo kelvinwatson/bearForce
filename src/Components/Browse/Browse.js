@@ -1,12 +1,9 @@
 import React from 'react';
-import DebugLog from '../../Utils/DebugLog';
+// import DebugLog from '../../Utils/DebugLog';
 import SectionContainer from '../../Containers/SectionContainer'
 import './Browse.css'
 
 export default class Browse extends React.Component {
-  constructor(props){
-    super(props);
-  }
 
   render(){
     const themeModifier = this.props.isDarkTheme ? 'dark' : 'light';

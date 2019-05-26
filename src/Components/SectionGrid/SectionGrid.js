@@ -2,7 +2,7 @@
  * Std lib
  */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import DebugLog from '../../Utils/DebugLog';
 /**
  * Styles
@@ -25,9 +25,9 @@ import './SectionGrid.css';
           <div className="aspect-ratio aspect-ratio--3x4">
             <div className="SectionGridItemContainer bg-center aspect-ratio--object pa1">
 
-              <img className={`SectionGridItemImage cover section-grid__image`} src={`${evt.imageUrl}`}/>
+              <img className={`SectionGridItemImage cover section-grid__image`} src={`${evt.imageUrl}`} alt={`${evt.name}`}/>
 
-              <aside className="SectionGridItem__OverlayContainer ma1">
+              <aside className="SectionGridItem__OverlayContainer ma1" onClick={()=>onItemClick(evt)}>
 
               </aside>
 

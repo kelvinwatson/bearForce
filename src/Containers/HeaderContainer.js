@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DebugLog from '../Utils/DebugLog';
+// import DebugLog from '../Utils/DebugLog';
 import Header from '../Components/Header/Header';
 
 const mapStateToProps = (state) => {

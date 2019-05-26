@@ -1,7 +1,7 @@
 import Event from './Data/Event';
 import FirebaseUtil from './Utils/InitializeFirebase';
 import DebugLog from './Utils/DebugLog';
-
+import Compress from 'compress.js';
 /**
  * action types
  */
@@ -34,6 +34,11 @@ export const EVENTS = {
   },
   ADD_CROPPED_IMG_SRC: {
     SUCCESS: 'SUCCESS_ADD_CROPPED_IMG_SRC'
+  },
+  COMPRESS_IMG: {
+    LOADING: 'LOADING_COMPRESS_IMG',
+    SUCCESS: 'SUCCESS_COMPRESS_IMG',
+    FAILURE: 'FAILURE_COMPRESS_IMG',
   },
   UPDATE_NAME: {
     SUCCESS: 'SUCCESS_UPDATE_NAME_EVENTS'
@@ -69,37 +74,67 @@ export const NAVIGATION = {
   UNSET: 'UNSET_SELECTED_NAVIGATION'
 };
 
-export const TASK = {
-  GET: {
-    LOADING: 'LOADING_GET_TASK',
-    SUCCESS: 'SUCCESS_GET_TASK',
-    FAILURE: 'FAILURE_GET_TASK',
-  },
-  CREATE: {
-    LOADING: 'LOADING_CREATE_TASK',
-    SUCCESS: 'SUCCESS_CREATE_TASK',
-    FAILURE: 'FAILURE_CREATE_TASK',
-  },
-  UPDATE: {
-    LOADING: 'LOADING_UPDATE_TASK',
-    SUCCESS: 'SUCCESS_UPDATE_TASK',
-    FAILURE: 'FAILURE_UPDATE_TASK',
-  },
-  DELETE: {
-    LOADING: 'LOADING_DELETE_TASK',
-    CONFIRM: 'CONFIRM_DELETE_TASK',
-    SUCCESS: 'SUCCESS_DELETE_TASK',
-    FAILURE: 'FAILURE_DELETE_TASK',
-  },
-};
+export function compressImage(file){
+  return async function(dispatch) {
+      dispatch(compressImageLoading(file));
 
-export const TASKS = {
-  GET: {
-    LOADING: 'LOADING_GET_TASKS',
-    SUCCESS: 'SUCCESS_GET_TASKS',
-    FAILURE: 'FAILURE_GET_TASKS',
-  },
-};
+      console.log('file', file);
+
+      const compress = new Compress();
+      try {
+        const compressedImages = await compress.compress([file], {
+            size: 2.0, // the max size in MB, defaults to 2MB
+            quality: 0.8, // the quality of the image, max is 1,
+            maxWidth: 650, // the max width of the output image, defaults to 1920px
+            // maxHeight: 800, // the max height of the output image, defaults to 1920px
+            resize: true // defaults to true, set false if you do not want to resize the image width and height
+        });
+        const compressedImage = compressedImages[0];
+        console.log('compressedImage', compressedImage);
+
+        //convert compressedImage back to file, then to url for editor
+       const base64String = compressedImage.prefix + compressedImage.data;
+       const mime = compressedImage.ext;
+       const fileName = compressedImage.alt;
+       const compressedFile = await urltoFile(base64String, fileName, mime);
+       const imageUrlForEditor = URL.createObjectURL(compressedFile);
+
+        dispatch(compressImageSuccess(imageUrlForEditor));
+
+      } catch(err) {
+        console.log('err',err);
+         dispatch(compressImageFailure(err));
+      }
+  }
+}
+
+async function urltoFile(url, filename, mimeType){
+    return (fetch(url)
+        .then(function(res){return res.arrayBuffer();})
+        .then(function(buf){return new File([buf], filename, {type:mimeType});})
+    );
+}
+
+
+export function compressImageLoading() {
+  return {
+    type: EVENTS.COMPRESS_IMG.LOADING,
+  }
+}
+
+export function compressImageSuccess(imageUrlForEditor){
+  return {
+    type: EVENTS.COMPRESS_IMG.SUCCESS,
+    imageUrlForEditor,
+  }
+}
+
+export function compressImageFailure(err){
+  return {
+    type: EVENTS.COMPRESS_IMG.FAILURE,
+    err,
+  }
+}
 
 
 export function submitNewEvent(event) {
@@ -109,17 +144,34 @@ export function submitNewEvent(event) {
     dispatch(submitNewEventLoading());
 
     const firebase = FirebaseUtil.getFirebase();
-    const firestore = firebase.firestore();
-    DebugLog('fs',firestore);
-    return firestore.collection('pendingEvents').add(event)
-    .then((docRef) => {
-        DebugLog("Document written with ID: ", docRef.id);
-        dispatch(submitNewEventSuccess(docRef));
-    })
-    .catch((error) => {
-        DebugLog("Error adding document: ", error);
-        dispatch(submitNewEventFailure(error));
+    const functions = firebase.functions();
+    const storageRef = firebase.storage().ref('pendingEventImages');
+    storageRef.putString(event.croppedImgSrc, 'data_url').then((snapshot) => {
+      var addEvent = functions.httpsCallable('addEvent');
+      delete event.croppedImgSrc;
+      console.log('SNAPSHOT: ', snapshot.ref.getDownloadURL());
+      snapshot.ref.getDownloadURL().then((URL) => {
+        console.log('URL: ', URL);
+        event.imageUrl = URL;
+        addEvent(event).then((result) => {
+          DebugLog("Document written with ID: ", result.id);
+          dispatch(submitNewEventSuccess(result.id));
+        }).catch((err) => {
+          DebugLog("Error adding document: ", err);
+          dispatch(submitNewEventFailure(err));
+        });
+      });
     });
+
+    // return firestore.collection('pendingEvents').add(event)
+    // .then((docRef) => {
+    //     DebugLog("Document written with ID: ", docRef.id);
+    //     dispatch(submitNewEventSuccess(docRef));
+    // })
+    // .catch((error) => {
+    //     DebugLog("Error adding document: ", error);
+    //     dispatch(submitNewEventFailure(error));
+    // });
   }
 }
 
@@ -275,73 +327,5 @@ export function setNavigation(page){
 export function unsetNavigation() {
   return {
     type: NAVIGATION.UNSET
-  }
-}
-
-export function getTasks(filter){
-  //TODO: use filter
-
-  return function (dispatch) {
-    dispatch(getTasksLoading(filter));
-    return FirebaseUtil.getFirebase().database().ref('tasks').once('value').then((snap)=>{
-      console.log('snap',snap.val());
-      dispatch(getTasksSuccess(snap && snap.val()));
-    });
-  }
-}
-
-export function getTasksLoading(filter){
-  return {
-    type: TASKS.GET.LOADING,
-    status: 'Fetching tasks...',
-    filter,
-  }
-}
-
-export function getTasksSuccess(tasks){
-  return {
-    type: TASKS.GET.SUCCESS,
-    status: 'Successfully retrieved tasks.',
-    tasks,
-  }
-}
-
-export function getTasksFailure(err){
-  return {
-    type: TASKS.GET.FAILURE,
-    status: err
-  }
-}
-
-export function createTask(task) {
-  return function (dispatch) {
-    dispatch(createTaskLoading());
-    return FirebaseUtil.getFirebase().database().ref('tasks').push(task, function(err){
-      err ? dispatch(createTaskFailure(task, err)) : dispatch(createTaskSuccess(task));
-    });
-  }
-}
-
-export function createTaskLoading(task){
-  return {
-    type: TASK.CREATE.LOADING,
-    status: 'Creating task...',
-    task,
-  }
-}
-
-export function createTaskSuccess(task){
-  return {
-    type: TASK.CREATE.SUCCESS,
-    status: 'Successfully created task.',
-    task,
-  }
-}
-
-export function createTaskFailure(task, err){
-  return {
-    type: TASK.CREATE.FAILURE,
-    status: err,
-    task,
   }
 }

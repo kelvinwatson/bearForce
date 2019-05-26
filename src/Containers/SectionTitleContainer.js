@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import DebugLog from '../Utils/DebugLog';
+// import DebugLog from '../Utils/DebugLog';
 import SectionTitle from '../Components/SectionTitle/SectionTitle';
 // import { scrollDown, scrollUp } from '../Actions';
 

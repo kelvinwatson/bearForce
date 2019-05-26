@@ -12,6 +12,10 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onItemClick: (evt) => {
+      DebugLog('onItemClick',evt.name);
+      //dispatch(openEventDetailPage(evt))
+    }
   }
 }
 
