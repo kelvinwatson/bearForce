@@ -2,6 +2,8 @@
  * Std lib
  */
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 // import PropTypes from 'prop-types';
 import DebugLog from '../../Utils/DebugLog';
 /**
@@ -25,19 +27,19 @@ import './SectionGrid.css';
           <div className="aspect-ratio aspect-ratio--3x4">
             <div className="SectionGridItemContainer bg-center aspect-ratio--object pa1">
 
-              <img className={`SectionGridItemImage cover section-grid__image`} src={`${evt.imageUrl}`} alt={`${evt.name}`}/>
+              <img className={`SectionGridItemImage cover section-grid__image`} src={`${evt.eventImageUrl}`} alt={`${evt.eventName}`}/>
 
-              <aside className="SectionGridItem__OverlayContainer ma1" onClick={()=>onItemClick(evt)}>
 
-              </aside>
 
-              <div className="SectionGridItem__OverlayText">
-                <span className={`SectionGridItem__EventName f3`}>{evt.name}</span>
+              <Link to={`/event/${evt.eventName}/${evt.eventDateTime}`} className="SectionGridItem__OverlayContainer ma1"/>
+
+              <Link to={`/event/${evt.eventName}/${evt.eventDateTime}`} className="SectionGridItem__OverlayText">
+                <span className={`SectionGridItem__EventName f3`}>{evt.eventName}</span>
                 <br/>
-                <span className={`SectionGridItem__StartDate f6`}>{evt.startDate}</span>
+                <span className={`SectionGridItem__StartDate f6`}>{evt.eventDateTime}</span>
                 <br/>
-                <span className={`SectionGridItem__Address f6`}>{evt.address}</span>
-              </div>
+                <span className={`SectionGridItem__Address f6`}>{evt.eventPlace}</span>
+              </Link>
             </div>
           </div>
         </div>

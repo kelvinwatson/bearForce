@@ -160,8 +160,8 @@ export default class Add extends React.Component {
 
   buildEventFromProps(props){
     return {
-      place: props.place,
-      croppedImgSrc: props.croppedImgSrc,
+      eventPlace: props.place,
+      croppedImgSrc: props.croppedImgSrc, 
       eventName: props.eventName,
       eventWebsiteUrl: props.eventWebsiteUrl,
       eventDateTime: props.eventDateTime,

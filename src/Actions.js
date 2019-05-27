@@ -165,7 +165,7 @@ export function submitNewEvent(event) {
       console.log('SNAPSHOT: ', snapshot.ref.getDownloadURL());
       snapshot.ref.getDownloadURL().then((URL) => {
         console.log('URL: ', URL);
-        event.imageUrl = URL;
+        event.eventImageUrl = URL;
         addEvent(event).then((result) => {
           DebugLog("Document written with ID: ", result.id);
           dispatch(submitNewEventSuccess(result.id));

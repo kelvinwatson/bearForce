@@ -1,13 +1,13 @@
 export default class Event {
 
   constructor(builder){
-    this.name = builder.name;
-    this.imageUrl = builder.imageUrl;
-    this.address = builder.address;
-    this.startDate = builder.startDate;
-    this.endDate = builder.endDate;
-    this.url = builder.url;
-    this.description = builder.description;
+    this.eventName = builder.eventName;
+    this.eventImageUrl = builder.eventImageUrl;
+    this.eventPlace = builder.eventPlace;
+    this.eventDateTime = builder.eventDateTime;
+    this.eventEndDateTime = builder.eventEndDateTime;
+    this.eventWebsiteUrl = builder.eventWebsiteUrl;
+    this.eventDescription = builder.eventDescription;
   }
 
   static get Builder() {
@@ -16,31 +16,31 @@ export default class Event {
       /**
        * Mandatory params
        */
-      constructor(name, imageUrl, address, startDate){
-        this.name = name;
-        this.imageUrl = imageUrl;
-        this.address = address;
-        this.startDate = startDate;
+      constructor(eventName, eventImageUrl, eventPlace, eventDateTime){
+        this.eventName = eventName;
+        this.eventImageUrl = eventImageUrl;
+        this.eventPlace = eventPlace;
+        this.eventDateTime = eventDateTime;
       }
       /**
        * Optional end date
        */
-      withEndDate(endDate){
-        this.endDate = endDate;
+      withEndDateTime(eventEndDateTime){
+        this.eventEndDateTime = eventEndDateTime;
         return this;
       }
       /**
        * Optional link to event/ticketing details
        */
-      withUrl(url){
-        this.url = url;
+      withEventWebsiteUrl(eventWebsiteUrl){
+        this.eventWebsiteUrl = eventWebsiteUrl;
         return this;
       }
       /**
        * Optional description
        */
-      withDescription(description){
-        this.description = description;
+      withEventDescription(eventDescription){
+        this.eventDescription = eventDescription;
         return this;
       }
       build(){

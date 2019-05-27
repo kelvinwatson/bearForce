@@ -27,7 +27,7 @@ const Root = ({ store }) => (
         <Route path="/browse" component={BrowseContainer} />
         <Route path="/reach" component={ReachContainer} />
         <Route path="/add" component={AddContainer} />
-        <Route path="/event/:id" component={EventContainer}/>
+        <Route path="/event/:name/:timestamp" component={EventContainer}/>
       </div>
     </BrowserRouter>
   </Provider>
