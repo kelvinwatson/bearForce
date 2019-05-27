@@ -188,7 +188,7 @@ export default class Add extends React.Component {
 
     return (
 
-        <div className={`pb4`}>
+        <div className={`pb4 ${isDarkTheme ? 'dark' : 'light'}`}>
 
         {SnackbarDom}
 
