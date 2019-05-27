@@ -51,7 +51,7 @@ import './SectionGrid.css';
                   },
                 }}
                 className="SectionGridItem__OverlayText">
-                <span className={`SectionGridItem__EventName f3`}>{event.eventName}</span>
+                <span className={`SectionGridItem__EventName f3 fw2 mb3 mt4 mt0-ns sans-serif`}>{event.eventName}</span>
                 <br/>
                 <span className={`SectionGridItem__StartDate f6`}>{event.eventDateTime}</span>
                 <br/>
