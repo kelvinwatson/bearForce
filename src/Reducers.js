@@ -103,19 +103,12 @@ export function add(state = {
         place: action.place,
         placeValidated
       });
-    case EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.SUCCESS:
-      DebugLog('ACTION.LOCALIMGSRC: ', action.localImgSrc)
+    case EVENTS.COMPRESS_IMG.SUCCESS:
       return Object.assign({}, state, {
-        localImgSrc: action.localImgSrc,
+        imageUrlForEditor: action.imageUrlForEditor,
         croppedImgSrc: undefined,
         eventPosterValidated: undefined
-      })
-    case EVENTS.ADD_UPDATE_LOCAL_IMG_SRC.LOADING:
-      DebugLog('ACTION.LOCALIMGSRC.LOADING: ', action.value);
-      return Object.assign({}, state, {
-        editorLoading: action.value,
-        eventPosterValidated: undefined
-      })
+      });
     case EVENTS.ADD_CROPPED_IMG_SRC.SUCCESS:
       return Object.assign({}, state, {
         croppedImgSrc: action.src,

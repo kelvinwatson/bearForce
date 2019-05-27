@@ -9,9 +9,8 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 module.exports = {
   addEvent: functions.https.onCall(async (event, context) => {
+    event.timestamp = new Date().toISOString();
     const result = await firestore.collection('pendingEvents').add(event)
     return result;
-    // const snapshot = await admin.database().ref('pendingEvents').push(event);
-    // return { id: snapshot.ref.toString() }
   })
 }

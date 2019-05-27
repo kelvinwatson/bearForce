@@ -1,6 +1,7 @@
 import React from 'react';
 import DebugLog from '../../Utils/DebugLog';
 import SectionTitleContainer from '../../Containers/SectionTitleContainer';
+import Snackbar from '../Snackbar/Snackbar';
 import { Autocomplete } from '@react-google-maps/api';
 import ImageEditorRc from 'react-cropper-image-editor';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -26,19 +27,9 @@ export default class Add extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
 
-  /*
-   * Listen for compressedImage changes
-   */
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.imageUrlForEditor !== this.props.imageUrlForEditor) {
-      // console.log('compressedImageChanged', this.props.compressedImage);
-
-    }
-  }
-
   onImageChange(evt) {
     //clear previous
-    this.onCroppedImageChange();
+    //this.onCroppedImageChange();
 
     const file = evt.nativeEvent.srcElement.files[0];
     if(!file)
@@ -46,6 +37,7 @@ export default class Add extends React.Component {
     const fileSize = file.size / 1024 / 1024;//MB
     if(fileSize > 10) {
       //TODO: Emit image too big failure.
+      this.buildSnackbar(this.props);
       return;
     }
     //compress
@@ -181,19 +173,28 @@ export default class Add extends React.Component {
     }
   }
 
+  buildSnackbar(props){
+    return (<Snackbar isDarkTheme={props.isDarkTheme} timeout={3000} message={'hello'} />);
+  }
+
   render(){
     const isDarkTheme = this.props.isDarkTheme;
     const AutoCompleteDom = this.buildAutoComplete(this.props);
     const ImageEditorDom = this.buildImageEditor(this.props);
     const ImagePreviewDom = this.buildImagePreview(this.props);
     const DateTimePickerDom = this.buildDateTimePicker(this.props);
+    const SnackbarDom = this.buildSnackbar(this.props);
     const fileUploadBorderClass = this.getBorderClass(this.props.eventPosterValidated, isDarkTheme);
     const eventNameBorderClass = this.getBorderClass(this.props.eventNameValidated, isDarkTheme);
     const eventWebsiteBorderClass = this.getBorderClass(this.props.eventWebsiteUrlValidated, isDarkTheme);
     // const
 
     return (
+
         <div className={`pb4`}>
+
+        {SnackbarDom}
+
         <SectionTitleContainer title={'ADD AN EVENT'}/>
         <form className={`AddContent ph3 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
         <input type="hidden" autoComplete="off" required/>

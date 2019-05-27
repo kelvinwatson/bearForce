@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 // import DebugLog from '../Utils/DebugLog';
 import Add from '../Components/Add/Add';
-import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName, eventWebsiteUpdate, updateEventDateTime, updateEventDescription, compressImage } from '../Actions';
+import { updatePlace, updateLocalImgSrc, localImageLoading, croppedImageUpdate, updateEventName, eventWebsiteUpdate, updateEventDateTime, updateEventDescription, compressImage, submitNewEvent } from '../Actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    imageUrlForEditor: state.compressImage.imageUrlForEditor,
+    imageUrlForEditor: state.add.imageUrlForEditor,
     editorLoading: state.add.editorLoading,
     isDarkTheme: state.theme.isDarkTheme,
     place: state.add.place,
@@ -58,7 +58,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(updateEventDescription(description))
     },
     submitNewEvent: (event) => {
-      dispatch(compressImage(event))
+      dispatch(submitNewEvent(event))
     }
   }
 }

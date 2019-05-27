@@ -77,34 +77,30 @@ export const NAVIGATION = {
 export function compressImage(file){
   return async function(dispatch) {
       dispatch(compressImageLoading(file));
+        const compress = new Compress();
+        try {
+          const compressedImages = await compress.compress([file], {
+              size: 2.0, // the max size in MB, defaults to 2MB
+              quality: 1, // the quality of the image, max is 1,
+              maxWidth: 1920, // the max width of the output image, defaults to 1920px
+              // maxHeight: 800, // the max height of the output image, defaults to 1920px
+              resize: true // defaults to true, set false if you do not want to resize the image width and height
+          });
+          const compressedImage = compressedImages[0];
+          console.log('compressedImage', compressedImage);
 
-      console.log('file', file);
+          //convert compressedImage back to file, then to url for editor
+         const base64String = compressedImage.prefix + compressedImage.data;
+         const mime = compressedImage.ext;
+         const fileName = compressedImage.alt;
+         const compressedFile = await urltoFile(base64String, fileName, mime);
+         const imageUrlForEditor = URL.createObjectURL(compressedFile);
 
-      const compress = new Compress();
-      try {
-        const compressedImages = await compress.compress([file], {
-            size: 2.0, // the max size in MB, defaults to 2MB
-            quality: 0.8, // the quality of the image, max is 1,
-            maxWidth: 650, // the max width of the output image, defaults to 1920px
-            // maxHeight: 800, // the max height of the output image, defaults to 1920px
-            resize: true // defaults to true, set false if you do not want to resize the image width and height
-        });
-        const compressedImage = compressedImages[0];
-        console.log('compressedImage', compressedImage);
-
-        //convert compressedImage back to file, then to url for editor
-       const base64String = compressedImage.prefix + compressedImage.data;
-       const mime = compressedImage.ext;
-       const fileName = compressedImage.alt;
-       const compressedFile = await urltoFile(base64String, fileName, mime);
-       const imageUrlForEditor = URL.createObjectURL(compressedFile);
-
-        dispatch(compressImageSuccess(imageUrlForEditor));
-
-      } catch(err) {
-        console.log('err',err);
-         dispatch(compressImageFailure(err));
-      }
+          dispatch(compressImageSuccess(imageUrlForEditor));
+        } catch(err) {
+          console.log('err',err);
+           dispatch(compressImageFailure(err));
+        }
   }
 }
 
@@ -145,7 +141,7 @@ export function submitNewEvent(event) {
 
     const firebase = FirebaseUtil.getFirebase();
     const functions = firebase.functions();
-    const storageRef = firebase.storage().ref('pendingEventImages');
+    const storageRef = firebase.storage().ref().child(`pendingEventImages/${new Date().getTime()}`);
     storageRef.putString(event.croppedImgSrc, 'data_url').then((snapshot) => {
       var addEvent = functions.httpsCallable('addEvent');
       delete event.croppedImgSrc;
@@ -162,16 +158,6 @@ export function submitNewEvent(event) {
         });
       });
     });
-
-    // return firestore.collection('pendingEvents').add(event)
-    // .then((docRef) => {
-    //     DebugLog("Document written with ID: ", docRef.id);
-    //     dispatch(submitNewEventSuccess(docRef));
-    // })
-    // .catch((error) => {
-    //     DebugLog("Error adding document: ", error);
-    //     dispatch(submitNewEventFailure(error));
-    // });
   }
 }
 
