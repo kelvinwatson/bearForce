@@ -1,7 +1,7 @@
 import React from 'react';
 import DebugLog from '../../Utils/DebugLog';
 import SectionTitleContainer from '../../Containers/SectionTitleContainer';
-import Snackbar from '../Snackbar/Snackbar';
+import SnackbarContainer from '../../Containers/SnackbarContainer';
 import { Autocomplete } from '@react-google-maps/api';
 import ImageEditorRc from 'react-cropper-image-editor';
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -30,24 +30,20 @@ export default class Add extends React.Component {
   onImageChange(evt) {
     //clear previous
     //this.onCroppedImageChange();
+    debugger;
 
     const file = evt.nativeEvent.srcElement.files[0];
     if(!file)
       return;
     const fileSize = file.size / 1024 / 1024;//MB
-    if(fileSize > 10) {
+    if(fileSize > 5) {
       //TODO: Emit image too big failure.
-      this.buildSnackbar(this.props);
+      this.props.errorImageSize();
       return;
     }
     //compress
     this.props.onCompressImage(file);
   }
-
-  compressImage(file){
-
-  }
-
 
   onCroppedImageChange(imgData) {
     this.props.onCroppedImageSaved(imgData);
@@ -174,7 +170,8 @@ export default class Add extends React.Component {
   }
 
   buildSnackbar(props){
-    return (<Snackbar isDarkTheme={props.isDarkTheme} timeout={3000} message={'hello'} />);
+    if (props.error && props.error.message)
+      return (<SnackbarContainer />);
   }
 
   render(){

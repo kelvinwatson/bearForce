@@ -5,6 +5,12 @@ import Compress from 'compress.js';
 /**
  * action types
  */
+
+export const ERROR = {
+  IMAGE_SIZE: 'ERROR_IMAGE_SIZE',
+  ACKNOWLEDGED: 'ERROR_ACKNOWLEDGED',
+}
+
 export const THEME = {
   TOGGLE: 'TOGGLE_THEME',
 }
@@ -67,12 +73,23 @@ export const MAPS = {
   }
 };
 
-
 export const NAVIGATION = {
   GET: 'GET_NAVIGATION',
   SET: 'SET_SELECTED_NAVIGATION',
   UNSET: 'UNSET_SELECTED_NAVIGATION'
 };
+
+export function errorImageSize() {
+  return {
+    type: ERROR.IMAGE_SIZE,
+  }
+}
+
+export function errorAcknowledged() {
+  return {
+    type: ERROR.ACKNOWLEDGED,
+  }
+}
 
 export function compressImage(file){
   return async function(dispatch) {

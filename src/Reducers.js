@@ -4,11 +4,33 @@ import DebugLog from './Utils/DebugLog';
 import { isValidURL } from './utils';
 
 import {
+  ERROR,
   MAPS,
   EVENTS,
   THEME,
   NAVIGATION,
 } from './Actions';
+
+export function error(state = {
+  message: undefined,
+  timeout: undefined,
+}, action) {
+  switch (action.type){
+    case ERROR.IMAGE_SIZE:
+      return Object.assign({}, state, {
+          message: 'Image size too large',
+          timeout: 3000,
+      });
+    case ERROR.ACKNOWLEDGED: {
+      return Object.assign({}, state, {
+          message: undefined,
+          timeout: undefined,
+      });
+    }
+    default:
+      return state;
+  }
+}
 
 export function maps(state = {
   isLoaded: false,
@@ -164,6 +186,7 @@ export function compressImage(state = {
  * root reducer
  */
 const RootReducer = combineReducers({
+  error,
   maps,
   theme,
   navigation,

@@ -11,15 +11,16 @@ import './Snackbar.css';
 /**
  * Basic header component
  */
- const Snackbar = ({ isDarkTheme, message, timeout }) => {
+ const Snackbar = ({ isDarkTheme, message, timeout, onErrorAcknowledged }) => {
 
    const themeModifier = isDarkTheme ? 'dark' : 'light';
 
-   let visibilityModifier = 'show';
+   debugger;
 
-   setTimeout( () => {
-     visibilityModifier = '';
-   }, timeout);
+   let visibilityModifier = message ? 'show' : 'dn';
+
+   if (message)
+      setTimeout( onErrorAcknowledged , timeout);
 
    return (
 
