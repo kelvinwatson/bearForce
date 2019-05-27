@@ -1,5 +1,5 @@
 import React from 'react';
-import DebugLog from '../../Utils/DebugLog';
+// import DebugLog from '../../Utils/DebugLog';
 import SectionTitleContainer from '../../Containers/SectionTitleContainer';
 import SnackbarContainer from '../../Containers/SnackbarContainer';
 import { Autocomplete } from '@react-google-maps/api';
@@ -161,7 +161,7 @@ export default class Add extends React.Component {
   buildEventFromProps(props){
     return {
       eventPlace: props.place,
-      croppedImgSrc: props.croppedImgSrc, 
+      croppedImgSrc: props.croppedImgSrc,
       eventName: props.eventName,
       eventWebsiteUrl: props.eventWebsiteUrl,
       eventDateTime: props.eventDateTime,

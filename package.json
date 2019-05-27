@@ -30,6 +30,7 @@
     "hls.js": "^0.12.2",
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.24.0",
+    "query-string": "^6.5.0",
     "react": "^16.7.0",
     "react-cropper-image-editor": "^1.0.10",
     "react-dom": "^16.7.0",
