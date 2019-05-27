@@ -19,14 +19,14 @@ import './SectionGrid.css';
    const themeModifier = isDarkTheme ? 'dark' : 'light';
    return (
 
-     <section className={`section-grid ${themeModifier} cf w-100 pa3`}>
+     <section className={`section-grid ${themeModifier} cf w-100`}>
       { data.map((event)=> {
 
         return (
 
-        <div className={`fl w-50 w-third-m w-25-ns`}>
+        <div className={`fl w-50 w-25-l link overflow-hidden`}>
           <div className="aspect-ratio aspect-ratio--3x4 overflow-hidden">
-            <div className="SectionGridItemContainer bg-center aspect-ratio--object pa1 grow">
+            <div className="SectionGridItemContainer bg-center aspect-ratio--object grow">
 
               <img className={`SectionGridItemImage cover section-grid__image`} src={`${event.eventImageUrl}`} alt={`${event.eventName}`}/>
 
