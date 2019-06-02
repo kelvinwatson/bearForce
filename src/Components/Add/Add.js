@@ -30,7 +30,6 @@ export default class Add extends React.Component {
   onImageChange(evt) {
     //clear previous
     //this.onCroppedImageChange();
-    debugger;
 
     const file = evt.nativeEvent.srcElement.files[0];
     if(!file)
@@ -236,9 +235,16 @@ export default class Add extends React.Component {
             <small id="comment-desc" className="f6 black-60">The more details, the better. Can use this text to <a href="/" className="link underline black-80 hover-blue">link to more info.</a></small>
           </div>
         </fieldset>
-        <div className="mt3">
-          <input className="event-submit f5 black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba b--black-20 border-box" type="submit"/>
-        </div>
+
+        <article class="cf mt3">
+          <div class="fl w-25">
+            <input className="v-mid tc dib event-submit f5 black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba b--black-20 border-box" type="submit"/>
+          </div>
+          <div class="fl w-25">
+            <Loading isLoading={this.props.submitFormLoading} isDarkTheme={this.props.isDarkTheme}/>
+          </div>
+        </article>
+
         </form>
         </div>
     )

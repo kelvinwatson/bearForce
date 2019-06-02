@@ -10,6 +10,9 @@ admin.initializeApp();
 module.exports = {
   addEvent: functions.https.onCall(async (event, context) => {
     event.timestamp = new Date().toISOString();
+    const eventDate = new Date(event.eventDateTime).toDateString();
+    const eventUrlId = `${event.eventName}-${eventDate}`.replace(/ /g,"-");
+    event.eventUrlId = eventUrlId;
     const result = await firestore.collection('pendingEvents').add(event)
     return result;
   })

@@ -22,7 +22,10 @@ const mapStateToProps = (state, ownProps) => {
     eventDateTime: state.add.eventDateTime,
     eventDateTimeValidated: state.add.eventDateTimeValidated,
     eventDescription: state.add.eventDescription,
-    eventDescriptionValidated: state.add.eventDescriptionValidated
+    eventDescriptionValidated: state.add.eventDescriptionValidated,
+    submitFormLoading: state.add.submitFormLoading,
+    submitFormSuccess: state.add.submitFormSuccess,
+    submitFormFailure: state.add.submitFormFailure,
   }
 }
 

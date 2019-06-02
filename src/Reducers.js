@@ -116,7 +116,10 @@ export function navigation(state = {
 }
 
 export function add(state = {
-  place: undefined
+  place: undefined,
+  submitFormLoading: false,
+  submitFormSuccess: false,
+  submitFormFailure: false,
 }, action){
   switch(action.type){
     case EVENTS.ADD_UPDATE_LOCATION.SUCCESS:
@@ -162,7 +165,23 @@ export function add(state = {
         eventDescriptionValidated: true
       })
     case EVENTS.SUBMIT_FORM.LOADING:
-      return state;
+      return Object.assign({}, state, {
+        submitFormLoading: true,
+        submitFormSuccess: false,
+        submitFormFailure: false,
+      });
+    case EVENTS.SUBMIT_FORM.FAILURE:
+      return Object.assign({}, state, {
+        submitFormLoading: false,
+        submitFormSuccess: false,
+        submitFormFailure: true,
+      });
+    case EVENTS.SUBMIT_FORM.SUCCESS:
+      return Object.assign({}, state, {
+        submitFormLoading: false,
+        submitFormSuccess: true,
+        submitFormFailure: false,
+      });
     default:
       return state;
   }
