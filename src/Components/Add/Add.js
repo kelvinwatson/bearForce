@@ -12,6 +12,7 @@ import './Add.css'
 import '../../CommonStyles/Common.css'
 
 import Loading from '../Loading/Loading.js'
+import Success from '../Success/Success.js'
 import Error from '../Error/Error.js'
 
 export default class Add extends React.Component {
@@ -176,6 +177,7 @@ export default class Add extends React.Component {
 
   render(){
     const isDarkTheme = this.props.isDarkTheme;
+    const submitFormSuccess = this.props.submitFormSuccess;
     const AutoCompleteDom = this.buildAutoComplete(this.props);
     const ImageEditorDom = this.buildImageEditor(this.props);
     const ImagePreviewDom = this.buildImagePreview(this.props);
@@ -192,7 +194,18 @@ export default class Add extends React.Component {
 
         {SnackbarDom}
 
+        {submitFormSuccess &&
+
+          <div className="db fw4 lh-copy f5 bg-animate inline-flex items-center pa2 w-100 measure ph3">
+          <Success isSuccess={submitFormSuccess} message={"Event added successfully! It will be posted once we have reviewed it."}/>
+          </div>
+        }
+
+        {!submitFormSuccess &&
+
+        <section>
         <SectionTitleContainer title={'ADD AN EVENT'}/>
+
         <form className={`AddContent ph3 pt0 black-80 ${isDarkTheme ? 'dark' : 'light'}`} onSubmit={this.submitForm}>
         <input type="hidden" autoComplete="off" required/>
         <fieldset className="ba b--transparent ph0 pv0 mh0">
@@ -248,6 +261,8 @@ export default class Add extends React.Component {
         </article>
 
         </form>
+        </section>
+        }
         </div>
     )
   }
