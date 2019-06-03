@@ -174,6 +174,8 @@ export function submitNewEvent(event) {
           dispatch(submitNewEventFailure(err));
         });
       });
+    }).catch((err)=> {
+      dispatch(submitNewEventFailure(err));
     });
   }
 }

@@ -12,6 +12,7 @@ import './Add.css'
 import '../../CommonStyles/Common.css'
 
 import Loading from '../Loading/Loading.js'
+import Error from '../Error/Error.js'
 
 export default class Add extends React.Component {
   constructor(props){
@@ -236,12 +237,13 @@ export default class Add extends React.Component {
           </div>
         </fieldset>
 
-        <article class="cf mt3">
-          <div class="fl w-25">
+        <article class="cf mt3 flex measure items-center">
+          <div class="">
             <input className="v-mid tc dib event-submit f5 black bg-animate hover-bg-black hover-white inline-flex items-center pa3 ba b--black-20 border-box" type="submit"/>
           </div>
-          <div class="fl w-25">
+          <div class="ml3">
             <Loading isLoading={this.props.submitFormLoading} isDarkTheme={this.props.isDarkTheme}/>
+            <Error hasError={this.props.submitFormFailure} isDarkTheme={this.props.isDarkTheme}/>
           </div>
         </article>
 
