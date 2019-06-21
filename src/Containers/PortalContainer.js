@@ -1,25 +1,25 @@
 import { connect } from 'react-redux';
 import DebugLog from '../Utils/DebugLog';
 import Portal from '../Components/Portal/Portal';
-import { onAdministratorSignedIn, promptSignIn, signOut } from '../Actions';
+import { administratorOnSignedIn, administratorPromptSignIn, administratorSignOut } from '../Actions';
 
 const mapStateToProps = (state) => {
   return {
     administrator: state.administrator.administrator,
-    promptSignIn: state.administrator.promptSignIn,
+    administratorPromptSignIn: state.administrator.administratorPromptSignIn,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAdministratorSignedIn: (administrator) => {
-      dispatch(onAdministratorSignedIn(administrator))
+    administratorOnSignedIn: (administrator) => {
+      dispatch(administratorOnSignedIn(administrator))
     },
-    promptSignIn: () => {
-      dispatch(promptSignIn())
+    administratorPromptSignIn: () => {
+      dispatch(administratorPromptSignIn())
     },
-    signOut: () => {
-      dispatch(signOut());
+    administratorSignOut: () => {
+      dispatch(administratorSignOut());
     }
   }
 }

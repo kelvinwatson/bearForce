@@ -2,14 +2,15 @@ import Event from './Data/Event';
 import FirebaseUtil from './Utils/InitializeFirebase';
 import DebugLog from './Utils/DebugLog';
 import Compress from 'compress.js';
+
 /**
  * action types
  */
-
  export const ADMINISTRATOR = {
    PROMPT_SIGN_IN: 'ADMINISTRATOR_PROMPT_SIGN_IN',
    SIGNED_IN: 'ADMINISTRATOR_SIGNED_IN',
    SIGN_OUT: 'ADMINISTRATOR_SIGN_OUT',
+   FETCH_PENDING_EVENTS: 'ADMINISTRATOR_FETCH_PENDING_EVENTS'
  }
 
 export const ERROR = {
@@ -85,25 +86,30 @@ export const NAVIGATION = {
   UNSET: 'UNSET_SELECTED_NAVIGATION'
 };
 
-export function onAdministratorSignedIn(administrator) {
+export function administratorOnSignedIn(administrator) {
   return {
     type: ADMINISTRATOR.SIGNED_IN,
     administrator: administrator,
   }
 }
 
-export function promptSignIn() {
+export function administratorPromptSignIn() {
   return {
     type: ADMINISTRATOR.PROMPT_SIGN_IN,
     administrator: undefined,
+    administratorPromptSignIn: true,
   }
 }
 
-export function signOut() {
+export function administratorSignOut() {
   return {
     type: ADMINISTRATOR.SIGN_OUT,
     administrator: undefined,
   }
+}
+
+export function administratorFetchPendingEvents() {
+
 }
 
 export function errorImageSize() {

@@ -14,23 +14,23 @@ import {
 
 export function administrator(state = {
   administrator: undefined,
-  promptSignIn: false,
+  administratorPromptSignIn: false,
 }, action) {
   switch(action.type){
     case ADMINISTRATOR.SIGNED_IN:
       return Object.assign({},state,{
         administrator: action.administrator,
-        promptSignIn: false,
+        administratorPromptSignIn: false,
       });
     case ADMINISTRATOR.PROMPT_SIGN_IN:
       return Object.assign({}, state, {
         administrator: undefined,
-        promptSignIn: true,
+        administratorPromptSignIn: true,
       });
     case ADMINISTRATOR.SIGN_OUT:
       return Object.assign({}, state, {
         administrator: undefined,
-        promptSignIn: false,
+        administratorPromptSignIn: false,
       });
     default:
       return state;

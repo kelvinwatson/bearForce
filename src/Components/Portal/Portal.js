@@ -8,7 +8,7 @@ export default class Portal extends React.Component {
   constructor(props){
     super(props);
 
-    this.signOut = this.signOut.bind(this);
+    this.administratorSignOut = this.administratorSignOut.bind(this);
     this.firebase = FirebaseUtil.getFirebase();
     this.administrator = this.props.administrator;
   }
@@ -16,30 +16,31 @@ export default class Portal extends React.Component {
   componentDidMount() {
     this.unregisterAuthObserver = this.firebase.auth().onAuthStateChanged((administrator)=> {
       if (administrator)
-        this.onAdministratorSignedIn(administrator);
+        this.administratorOnSignedIn(administrator);
       else
-        this.promptSignIn();
+        this.administratorPromptSignIn();
     })
   }
 
   componentWillUnmount() {
     this.unregisterAuthObserver();
   }
-  onAdministratorSignedIn(administrator){
+
+  administratorOnSignedIn(administrator){
     //TODO configure authentication/firestore to only allow reads if uid== adminUid
-    this.props.onAdministratorSignedIn(administrator);
+    this.props.administratorOnSignedIn(administrator);
   }
 
-  promptSignIn() {
-    this.props.promptSignIn();
+  administratorPromptSignIn() {
+    this.props.administratorPromptSignIn();
   }
 
-  signOut(e) {
+  administratorSignOut(e) {
     e.preventDefault();
 
     this.firebase.auth().signOut();
 
-    this.props.signOut();
+    this.props.administratorSignOut();
   }
 
   render(){
@@ -63,7 +64,7 @@ export default class Portal extends React.Component {
     {
         return (
           <section className="Portal__SignedOut">
-            Heyo <button onClick={(e)=>this.signOut(e)}></button>
+            Heyo <button onClick={(e)=>this.administratorSignOut(e)}>Sign Out</button>
           </section>
         )
     }
