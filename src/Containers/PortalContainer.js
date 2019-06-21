@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 import DebugLog from '../Utils/DebugLog';
 import Portal from '../Components/Portal/Portal';
-import { administratorOnSignedIn, administratorPromptSignIn, administratorSignOut } from '../Actions';
+import { administratorOnSignedIn, administratorPromptSignIn, administratorSignOut, administratorFetchPendingEvents } from '../Actions';
 
 const mapStateToProps = (state) => {
+  DebugLog('mapStateToProps',state);
   return {
     administrator: state.administrator.administrator,
     administratorPromptSignIn: state.administrator.administratorPromptSignIn,
+    pendingEvents: state.administrator.pendingEvents || [],
+    pendingEventsLoading: state.administrator.pendingEventsloading,
   }
 }
 
@@ -20,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     administratorSignOut: () => {
       dispatch(administratorSignOut());
+    },
+    administratorFetchPendingEvents: () => {
+      dispatch(administratorFetchPendingEvents());
     }
   }
 }

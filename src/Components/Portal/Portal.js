@@ -8,15 +8,22 @@ export default class Portal extends React.Component {
   constructor(props){
     super(props);
 
+    //props
+    this.administrator = this.props.administrator;
+    this.pendingEvents = this.props.pendingEvents;
+    this.pendingEventsLoading = this.props.pendingEventsLoading;
+
+    //internal
     this.administratorSignOut = this.administratorSignOut.bind(this);
     this.firebase = FirebaseUtil.getFirebase();
-    this.administrator = this.props.administrator;
   }
 
   componentDidMount() {
     this.unregisterAuthObserver = this.firebase.auth().onAuthStateChanged((administrator)=> {
-      if (administrator)
+      if (administrator) {
         this.administratorOnSignedIn(administrator);
+        this.administratorFetchPendingEvents();
+      }
       else
         this.administratorPromptSignIn();
     })
@@ -24,6 +31,14 @@ export default class Portal extends React.Component {
 
   componentWillUnmount() {
     this.unregisterAuthObserver();
+  }
+
+  componentWillReceiveProps(newProps) {
+    DebugLog('componentWillReceiveProps', newProps);
+    //listen for changed props and trigger rerender with new props
+    this.administrator = newProps.administrator;
+    this.pendingEvents = newProps.pendingEvents;
+    this.pendingEventsLoading = newProps.pendingEventsLoading;
   }
 
   administratorOnSignedIn(administrator){
@@ -43,9 +58,15 @@ export default class Portal extends React.Component {
     this.props.administratorSignOut();
   }
 
+  administratorFetchPendingEvents() {
+    this.props.administratorFetchPendingEvents();
+  }
+
   render(){
     const firebase = this.firebase;
     const administrator = this.administrator;
+    const pendingEvents = this.pendingEvents;
+    DebugLog('pendingEvents', pendingEvents);
 
     // Configure FirebaseUI.
     const uiConfig = {
@@ -63,9 +84,26 @@ export default class Portal extends React.Component {
     if (firebase.auth().currentUser)
     {
         return (
-          <section className="Portal__SignedOut">
-            Heyo <button onClick={(e)=>this.administratorSignOut(e)}>Sign Out</button>
-          </section>
+          <div>
+            <section className="Portal__SignedOut">
+              hello {firebase.auth().currentUser.displayName} <button onClick={(e)=>this.administratorSignOut(e)}>Sign Out</button>
+            </section>
+
+            <div>
+              {pendingEvents && pendingEvents.map( (e) => {
+                  return(
+                    <ul key={e.id}>Name: {e.eventName}
+                      <li>Date/Time: {e.eventDateTime}</li>
+                      <li>Desc: {e.eventDescription}</li>
+                      <li>Img Url: {e.eventImageUrl}</li>
+                      <li>Place: {e.eventPlace && e.eventPlace.formatted_address}</li>
+                      <li>Url ID: {e.eventUrlId}</li>
+                      <li>Website {e.eventWebsiteUrl}</li>
+                      <li>Timestamp {e.timestamp}</li>
+                    </ul>
+              )})}
+            </div>
+          </div>
         )
     }
 

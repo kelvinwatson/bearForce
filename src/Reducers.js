@@ -15,6 +15,8 @@ import {
 export function administrator(state = {
   administrator: undefined,
   administratorPromptSignIn: false,
+  pendingEventsLoading: false,
+  pendingEvents: undefined,
 }, action) {
   switch(action.type){
     case ADMINISTRATOR.SIGNED_IN:
@@ -31,6 +33,19 @@ export function administrator(state = {
       return Object.assign({}, state, {
         administrator: undefined,
         administratorPromptSignIn: false,
+      });
+    case ADMINISTRATOR.FETCH_PENDING_EVENTS.LOADING:
+      return Object.assign({}, state, {
+        pendingEventsLoading: true,
+      });
+    case ADMINISTRATOR.FETCH_PENDING_EVENTS.SUCCESS:
+      return Object.assign({}, state, {
+        pendingEventsLoading: false,
+        pendingEvents: action.pendingEvents,
+      });
+    case ADMINISTRATOR.FETCH_PENDING_EVENTS.FAILURE:
+      return Object.assign({}, state, {
+        pendingEventsLoading: false,
       });
     default:
       return state;

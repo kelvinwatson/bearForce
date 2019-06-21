@@ -7,10 +7,14 @@ import Compress from 'compress.js';
  * action types
  */
  export const ADMINISTRATOR = {
-   PROMPT_SIGN_IN: 'ADMINISTRATOR_PROMPT_SIGN_IN',
-   SIGNED_IN: 'ADMINISTRATOR_SIGNED_IN',
-   SIGN_OUT: 'ADMINISTRATOR_SIGN_OUT',
-   FETCH_PENDING_EVENTS: 'ADMINISTRATOR_FETCH_PENDING_EVENTS'
+   PROMPT_SIGN_IN: 'PROMPT_SIGN_IN_ADMINISTRATOR_',
+   SIGNED_IN: 'SIGNED_IN_ADMINISTRATOR',
+   SIGN_OUT: 'SIGN_OUT_ADMINISTRATOR',
+   FETCH_PENDING_EVENTS: {
+     LOADING: 'LOADING_FETCH_PENDING_EVENTS_ADMINISTRATOR',
+     SUCCESS: 'SUCCESS_FETCH_PENDING_EVENTS_ADMINISTRATOR',
+     FAILURE: 'FAILURE_FETCH_PENDING_EVENTS_ADMINISTRATOR',
+   }
  }
 
 export const ERROR = {
@@ -108,8 +112,42 @@ export function administratorSignOut() {
   }
 }
 
-export function administratorFetchPendingEvents() {
+export function administratorFetchPendingEventsLoading() {
+  return {
+    type: ADMINISTRATOR.FETCH_PENDING_EVENTS.LOADING,
+  }
+}
 
+export function administratorFetchPendingEventsSuccess(pendingEvents) {
+  return {
+    type: ADMINISTRATOR.FETCH_PENDING_EVENTS.SUCCESS,
+    pendingEvents,
+  }
+}
+
+export function administratorFetchPendingEventsFailure(err) {
+  return {
+    type: ADMINISTRATOR.FETCH_PENDING_EVENTS.FAILURE,
+    err,
+  }
+}
+export function administratorFetchPendingEvents(){
+  return async function(dispatch) {
+      dispatch(administratorFetchPendingEventsLoading());
+      const firebase = FirebaseUtil.getFirebase();
+      const firestore = firebase.firestore();
+      try {
+        const querySnapshot = await firestore.collection('pendingEvents').get();
+        let pendingEvents = [];
+        querySnapshot.forEach((doc) => {
+
+          pendingEvents.push(doc.data());
+        });
+        dispatch(administratorFetchPendingEventsSuccess(pendingEvents));
+      } catch(err){
+        dispatch(administratorFetchPendingEventsFailure(err));
+      }
+  }
 }
 
 export function errorImageSize() {
