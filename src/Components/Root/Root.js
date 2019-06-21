@@ -12,6 +12,7 @@ import BrowseContainer from '../../Containers/BrowseContainer';
 import EventContainer from '../../Containers/EventContainer';
 import GoogleMapLoaderContainer from '../../Containers/GoogleMapLoaderContainer';
 import ReachContainer from '../../Containers/ReachContainer';
+import PortalContainer from '../../Containers/PortalContainer';
 import './Root.css';
 
 const Root = ({ store }) => (
@@ -28,6 +29,7 @@ const Root = ({ store }) => (
         <Route path="/reach" component={ReachContainer} />
         <Route path="/add" component={AddContainer} />
         <Route path="/event" component={EventContainer}/>
+        <Route path="/portal" component={PortalContainer}/>
       </div>
     </BrowserRouter>
   </Provider>

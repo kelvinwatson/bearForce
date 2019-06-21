@@ -6,6 +6,12 @@ import Compress from 'compress.js';
  * action types
  */
 
+ export const ADMINISTRATOR = {
+   PROMPT_SIGN_IN: 'ADMINISTRATOR_PROMPT_SIGN_IN',
+   SIGNED_IN: 'ADMINISTRATOR_SIGNED_IN',
+   SIGN_OUT: 'ADMINISTRATOR_SIGN_OUT',
+ }
+
 export const ERROR = {
   IMAGE_SIZE: 'ERROR_IMAGE_SIZE',
   ACKNOWLEDGED: 'ERROR_ACKNOWLEDGED',
@@ -78,6 +84,27 @@ export const NAVIGATION = {
   SET: 'SET_SELECTED_NAVIGATION',
   UNSET: 'UNSET_SELECTED_NAVIGATION'
 };
+
+export function onAdministratorSignedIn(administrator) {
+  return {
+    type: ADMINISTRATOR.SIGNED_IN,
+    administrator: administrator,
+  }
+}
+
+export function promptSignIn() {
+  return {
+    type: ADMINISTRATOR.PROMPT_SIGN_IN,
+    administrator: undefined,
+  }
+}
+
+export function signOut() {
+  return {
+    type: ADMINISTRATOR.SIGN_OUT,
+    administrator: undefined,
+  }
+}
 
 export function errorImageSize() {
   return {

@@ -4,12 +4,38 @@ import DebugLog from './Utils/DebugLog';
 import { isValidURL } from './utils';
 
 import {
+  ADMINISTRATOR,
   ERROR,
   MAPS,
   EVENTS,
   THEME,
   NAVIGATION,
 } from './Actions';
+
+export function administrator(state = {
+  administrator: undefined,
+  promptSignIn: false,
+}, action) {
+  switch(action.type){
+    case ADMINISTRATOR.SIGNED_IN:
+      return Object.assign({},state,{
+        administrator: action.administrator,
+        promptSignIn: false,
+      });
+    case ADMINISTRATOR.PROMPT_SIGN_IN:
+      return Object.assign({}, state, {
+        administrator: undefined,
+        promptSignIn: true,
+      });
+    case ADMINISTRATOR.SIGN_OUT:
+      return Object.assign({}, state, {
+        administrator: undefined,
+        promptSignIn: false,
+      });
+    default:
+      return state;
+  }
+}
 
 export function error(state = {
   message: undefined,
@@ -51,8 +77,6 @@ export function maps(state = {
 export function theme(state = {
     isDarkTheme: false,
 }, action) {
-  DebugLog('setting theme', state.isDarkTheme);
-
   switch(action.type) {
     case THEME.TOGGLE:
       return Object.assign({}, state, {
@@ -205,6 +229,7 @@ export function compressImage(state = {
  * root reducer
  */
 const RootReducer = combineReducers({
+  administrator,
   error,
   maps,
   theme,
